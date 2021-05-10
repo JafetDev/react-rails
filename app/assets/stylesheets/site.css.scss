@@ -1,0 +1,432 @@
+// Place all the styles related to the site controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$font-base: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-serif: 'Playfair Display', Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
+$font-serif2: 'Playfair Display SC', $font-serif;
+
+$blue: #232847;
+$black: #333;
+$white: #fff;
+
+$mq-tablets: 1000px;
+$mq-tablets-small: 760px;
+$mq-mobile: 600px;
+$mq-mobile-small: 440px;
+
+@mixin placeholder {
+  &::placeholder{ @content }
+  &::-moz-placeholder{ @content }
+  &::-webkit-input-placeholder{ @content }
+}
+
+@mixin object-fit($size){
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  max-height: $size;
+  min-height: $size;
+  height: 100%;
+  width: 100%;
+}
+
+@mixin tablets{
+  @media(max-width: $mq-tablets){
+    @content;
+  }
+}
+@mixin smalltablets{
+  @media(max-width: $mq-tablets-small){
+    @content;
+  }
+}
+@mixin mobile{
+  @media(max-width: $mq-mobile){
+    @content;
+  }
+}
+@mixin smallmobile{
+  @media(max-width: $mq-mobile-small){
+    @content;
+  }
+}
+
+
+html{ -webkit-text-size-adjust: 100%; }
+
+html, body{
+  margin: 0;
+  padding: 0;
+  font: 16px/1.3 $font-base;
+}
+body{
+  background: $white;
+  color: $black;
+  background-image: image-url("hero.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  background:  image-url("hero.jpg") no-repeat top center / auto 700px;
+}
+
+*{
+  max-width: 100%;
+  font-variant-ligatures: none;
+}
+
+.wrap{
+  width: 960px;
+  width: clamp(240px, 100%, 1080px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  @media(max-width: calc(1080px + 20px)){
+    padding-left: 10px;
+    padding-right: 10px;
+    &--fullmobile{
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  &.mtopfull{ margin-top: 100px; }
+  &.mtopq{ margin-top: 35px; }
+}
+
+a{
+  color: inherit;
+}
+
+svg{
+  fill: currentColor;
+  max-width: none;
+}
+.svg{
+  display: inline-block;
+  vertical-align: middle;
+  width: 0.9em;
+  line-height: 0.9em;
+  &.top{
+    vertical-align: top;
+  }
+}
+
+.ctr{ text-align: center; }
+
+input, textarea, select, button{
+  font: inherit;
+  box-sizing: border-box;
+}
+.inputtext, textarea{
+  border: 1px solid rgba($blue, 0.3);
+  padding: 5px 8px;
+  border-radius: 1px;
+}
+.button{
+  display: inline-block;
+  text-transform: uppercase;
+  background: $blue;
+  color: $white;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 13px 30px;
+}
+a.button{
+  text-decoration: none;
+}
+.p{
+  margin: 5px 0;
+}
+
+h1,h2,h3,h4,h5{ font-weight: 300; }
+
+.title{
+  font-family: $font-serif;
+}
+.title-pre{
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  color: lighten($blue, 50%);
+}
+.title-main{
+  font-size: 3.5rem;
+  @include tablets{
+    font-size: 2.8rem;
+  }
+}
+.title-subt{
+  font-size: 2.5rem;
+}
+.title-white{
+  color: $white;
+}
+.notop{ margin-top: 0; }
+.nobottom{ margin-bottom: 0; }
+.intro{
+  font-size: 1.1rem;
+}
+
+.icontext{
+  display: flex;
+  align-items: center;
+  .svg{
+    margin-right: 5px;
+  }
+}
+
+.nicelist{
+  list-style: square;
+  > li{
+    padding: 5px 0;
+  }
+}
+
+.topbar{}
+  .topbar--cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    h2{
+      margin: 0;
+      padding: 0;
+      span{ font-size: 0; }
+      .svg{
+        width: 180px;
+      }
+    }
+    @include smalltablets{
+      flex-direction: column-reverse;
+      padding-top: 5px;
+      h2{
+        margin-top: 10px;
+      }
+    }
+  }
+  .topbar-menu{
+    &--ul{
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    &--li{
+      padding: 10px;
+    }
+    @include mobile{
+      &--ul{
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      &--li{
+        padding: 3px 5px;
+      }
+    }
+  }
+
+.h2col{
+  color: $white;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 30px;
+  @include smalltablets{
+    display: block;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+}
+.contact-card--cont{
+  display: flex;
+  place-content: center center;
+  .contact-card{
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 15px 32px;
+    place-self: center center;
+    max-width: 420px;
+    background: $white;
+    color: $black;
+    font-size: 0.9rem;
+    h3.title{
+      font-size: 1.4rem;
+      margin: 0;
+    }
+    .inputtext{
+      border: 0;
+      background: lighten($blue, 70%);
+    }
+  }
+}
+
+.c3cols{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 20px;
+  @include smalltablets{
+    max-width: 340px;
+    grid-template-columns: auto;
+    grid-gap: 50px;
+    margin: 0 auto;
+  }
+}
+  .aptcard{
+    display: grid;
+    grid-template-rows: min-content 300px min-content auto min-content;
+    color: $black;
+    box-shadow: 0 0 10px rgba(#000, 0.3);
+    &--title{
+      margin: 0;
+      color: $white;
+      background-color: rgba($blue, 0.9);
+      font-size: 1.8rem;
+      text-align: center;
+      font-family: $font-serif2;
+      padding: 15px 0;
+    }
+    &--img{
+      img{
+        @include object-fit(100%);
+      }
+    }
+    &--disp{
+      margin-bottom: -13px;
+    }
+    &--cta{
+      background: $blue;
+      color: $white;
+      a{
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        text-align: center;
+        padding: 15px 0;
+      }
+    }
+  }
+
+.bigaptcard{
+  display: grid;
+  grid-template-columns: minmax(0, 55fr) minmax(0, 73fr);
+  @include smalltablets{
+    display: flex;
+    max-width: 340px;
+    margin: 0 auto;
+    flex-direction: column-reverse;
+  }
+  &--desc{
+    background: #2D2D5D url('/img/bg-premier.png') no-repeat center right;
+    background-size: auto 90%;
+    color: #E3E3F2;
+    padding: 20px 10px 20px 20px;
+    h3{
+      margin: 0;
+      font-size: 1.8rem;
+      font-family: $font-serif2;
+      padding: 15px 0;
+      color: $white;
+    }
+  }
+  &--img{
+    img{
+      @include object-fit(100%);
+    }
+  }
+}
+
+.collage{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, min-content));
+  grid-gap: 20px;
+  grid-template-areas:
+    'img1 img2 txt txt'
+    'img3 img3 txt txt';
+  .collage--txt{ grid-area: txt; }
+  .collage--img1{ grid-area: img1; }
+  .collage--img2{ grid-area: img2; }
+  .collage--img3{ grid-area: img3; }
+  img.of{
+    @include object-fit(100%);
+  }
+  @include smalltablets{
+    max-width: 340px;
+    margin: 0 auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(0, 1fr));
+    grid-template-areas:
+      'img3 img3'
+      'txt txt'
+      'img2 img1';
+
+    img.of{
+      min-height: 100px;
+      max-height: auto;
+    }
+  }
+}
+
+.card-location{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 20px;
+  @include smalltablets{
+    display: block;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  &--desc{
+  }
+  &--img{
+    img{
+      @include object-fit(100%);
+    }
+  }
+}
+
+
+.closing{
+  max-width: 740px;
+  margin: 0 auto;
+  .landing-closing{
+    width: 80px;
+  }
+}
+.bottom-card{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-gap: 60px;
+  margin-bottom: 100px;
+  @include smalltablets{
+    max-width: 340px;
+    grid-template-columns: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.bg-curved{
+  background: url('/img/bg-curved.svg') center center / 100% 94% no-repeat;
+  color: #2c2c5c;
+}
+
+.ui-label{
+  font-size: 0.85em;
+  &--error{
+    color: #f00;
+  }
+  &--wait{
+    color: #aaa;
+  }
+}
+
+::selection{
+  background: $blue;
+  color: $white;
+}
